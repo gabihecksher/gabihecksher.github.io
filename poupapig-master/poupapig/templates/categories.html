@@ -1,0 +1,21 @@
+{% extends 'registration/base_profile.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Total gasto</th>
+        </tr>
+            
+                {% for ct in total_per_category %}
+                    <tr>
+                        <td>{{ct.0}}</td>
+                        <td>{{ct.1}}</td>
+                    </tr>
+                {% endfor %}
+                
+    </table>
+        
+    <a href="{% url 'new_category' %}" class="button">Criar nova categoria</a>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends '../base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div id="buttons">
+      <a href="{% url 'login' %}" class="button" id="buttonLoginActive">Log In</a>
+      <a href="{% url 'signup' %}" class="button" id="buttonSignup">Sign Up</a>
+  </div>
+  {% if form.errors %}
+    <p style="color: red">Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  <div id="loginForm">
+    <h1>Poupa Pig</h1>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+          {{ field }}<br>
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+          {% if field.help_text %}
+            <p><small style="color: grey">{{ field.help_text }}</small></p>
+          {% endif %}
+        </p>
+      {% endfor %}
+      <button class="button" type="submit">Entrar</button>
+    </form>
+  </div>
+  <img id="img" src="{% static 'images/pig.png' %}">
+{% endblock %}
